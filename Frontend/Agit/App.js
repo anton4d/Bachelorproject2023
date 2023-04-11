@@ -1,18 +1,21 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { useState,useEffect } from 'react-native';
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import HomeScreen from './screen/Homescreen';
-import SearchScreen from './screen/Searchscreen';
-import SettingsScreen from './screen/Settingsscreen';
-import StoreScreen from './screen/Storescreen';
-
+import HomeScreen from './components/Mainscreens/Homescreen';
+import SearchScreen from './components/Mainscreens/Searchscreen';
+import SettingsScreen from './components/Mainscreens/Settingsscreen';
+import StoresScreen from './components/Mainscreens/Storesscreen';
+import WelcomeScreen from './components/welcomeScreens/WelcomeScreens';
 
 
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 function MyTabs() {
   return (
@@ -34,7 +37,7 @@ function MyTabs() {
       />
       <Tab.Screen
       name="Stores"
-      component={StoreScreen}
+      component={StoresScreen}
       options={{
         tabBarLabel: 'Saved Stores',
         tabBarIcon: ({ color, size }) => (
@@ -68,10 +71,46 @@ function MyTabs() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+function App() {
+  const [isFirstTime, setIsFirstTime] = useState(false);
+
+
+  useEffect(() => {
+    // Check if the app is being opened for the first time
+    AsyncStorage.getItem('isFirstTime').then((value) => {
+      if (value === null) {
+        // Set the value to indicate that it is the first time the app is opened
+        AsyncStorage.setItem('isFirstTime', 'true');
+        setIsFirstTime(true);
+      } else {
+        setIsFirstTime(false);
+      }
+    });
+  }, []);
+  const handleIsFirstTime = () => {
+    AsyncStorage.setItem('isFirstTime', 'false');
+    setIsFirstTime(false);
+  };
+
+
+    if (isFirstTime){
+    return (
+      <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen 
+      name="welcomeScreen"
+      component={WelcomeScreen}
+      options={{ headerShown: false }}
+      handleIsFirstTime={handleIsFirstTime}/>
+      </Stack.Navigator>
+      </NavigationContainer>
   );
+  } else {
+    return (
+      <NavigationContainer>
+      <MyTabs />
+      </NavigationContainer>
+  );
+  }
 }
+export default App

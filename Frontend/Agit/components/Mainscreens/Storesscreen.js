@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const StoreScreen = () => {
+const StoresScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to my app!</Text>
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StoreScreen;
+export default StoresScreen;
