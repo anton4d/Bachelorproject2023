@@ -3,38 +3,13 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import HomeScreen from './screen/Homescreen';
+import SearchScreen from './screen/Searchscreen';
+import SettingsScreen from './screen/Settingsscreen';
+import StoreScreen from './screen/Storescreen';
 
-function Home() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Feed!</Text>
-    </View>
-  );
-}
 
-function Stores() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Saved stores!</Text>
-    </View>
-  );
-}
 
-function Settings() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
-
-function Search() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Search Stores!</Text>
-    </View>
-  );
-}
 
 
 const Tab = createBottomTabNavigator();
@@ -49,7 +24,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -59,7 +34,7 @@ function MyTabs() {
       />
       <Tab.Screen
       name="Stores"
-      component={Stores}
+      component={StoreScreen}
       options={{
         tabBarLabel: 'Saved Stores',
         tabBarIcon: ({ color, size }) => (
@@ -69,7 +44,7 @@ function MyTabs() {
     />
       <Tab.Screen
         name="Search"
-        component={Search}
+        component={SearchScreen}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
@@ -81,7 +56,7 @@ function MyTabs() {
       
       <Tab.Screen
         name="Settings"
-        component={Settings}
+        component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
