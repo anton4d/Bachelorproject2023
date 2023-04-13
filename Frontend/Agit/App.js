@@ -1,21 +1,20 @@
-import * as React from 'react';
-import { useState,useEffect } from 'react-native';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from './components/Mainscreens/Homescreen';
 import SearchScreen from './components/Mainscreens/Searchscreen';
 import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoresScreen from './components/Mainscreens/Storesscreen';
-import WelcomeScreen from './components/welcomeScreens/WelcomeScreens';
+import { View, Text,} from 'react-native';
+
 
 
 
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+
 
 function MyTabs() {
   return (
@@ -70,47 +69,44 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+async function checkIfFirstTimeOpening() {
+  try {
+    const value = await AsyncStorage.getItem('isFirstTimeOpening');
+    if (value === null) {
+      await AsyncStorage.setItem('isFirstTimeOpening', 'false');
+      console.log('This is the first time the app is opened');
+      return true;
+    } else {
+      console.log('The app has been opened before');
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
 
 function App() {
-  const [isFirstTime, setIsFirstTime] = useState(false);
-
+  const [isFirstTime, setIsFirstTime] = useState(true);
 
   useEffect(() => {
-    // Check if the app is being opened for the first time
-    AsyncStorage.getItem('isFirstTime').then((value) => {
-      if (value === null) {
-        // Set the value to indicate that it is the first time the app is opened
-        AsyncStorage.setItem('isFirstTime', 'true');
-        setIsFirstTime(true);
-      } else {
-        setIsFirstTime(false);
-      }
-    });
+    async function checkFirstTime() {
+      const isFirstTimeOpening = await checkIfFirstTimeOpening();
+      setIsFirstTime(isFirstTimeOpening);
+    }
+
+    checkFirstTime();
   }, []);
-  const handleIsFirstTime = () => {
-    AsyncStorage.setItem('isFirstTime', 'false');
-    setIsFirstTime(false);
-  };
 
-
-    if (isFirstTime){
-    return (
+  return (
       <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen 
-      name="welcomeScreen"
-      component={WelcomeScreen}
-      options={{ headerShown: false }}
-      handleIsFirstTime={handleIsFirstTime}/>
-      </Stack.Navigator>
+        {isFirstTime ? (
+            <View><Text>This is the first time the app is opened</Text></View>
+
+        ) : (
+            <MyTabs />
+        )}
       </NavigationContainer>
   );
-  } else {
-    return (
-      <NavigationContainer>
-      <MyTabs />
-      </NavigationContainer>
-  );
-  }
 }
 export default App
