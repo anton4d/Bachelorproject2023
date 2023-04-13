@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useState,useEffect } from 'react-native';
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
+//import { useState,useEffect } from 'react-native';
+//import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeScreen from './components/Mainscreens/Homescreen';
 import SearchScreen from './components/Mainscreens/Searchscreen';
 import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoresScreen from './components/Mainscreens/Storesscreen';
-import WelcomeScreen from './components/welcomeScreens/WelcomeScreens';
+//import WelcomeScreen from './components/welcomeScreens/WelcomeScreens';
 
 
 
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+//const Stack = createNativeStackNavigator();
 
 function MyTabs() {
   return (
@@ -72,7 +72,7 @@ function MyTabs() {
 }
 
 function App() {
-  const [isFirstTime, setIsFirstTime] = useState(false);
+/*  const [isFirstTime, setIsFirstTime] = useState(false);
 
 
   useEffect(() => {
@@ -106,11 +106,11 @@ function App() {
       </NavigationContainer>
   );
   } else {
-    return (
+  */ return (
       <NavigationContainer>
       <MyTabs />
       </NavigationContainer>
   );
   }
-}
+//}
 export default App
