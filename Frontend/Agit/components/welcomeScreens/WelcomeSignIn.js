@@ -73,7 +73,7 @@ const WelcomeSignIn = ({navigation}) => {
                             <Text style={styles.loginText}>Glemt kodeord</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={login}>
-                            <Text style={styles.loginText}>Har ingen bruger</Text>
+                            <Text style={styles.loginText}>Har bruger</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
