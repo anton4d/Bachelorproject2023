@@ -36,7 +36,7 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-      name="Stores"
+      name="Gemte Butikker"
       component={StoresScreen}
       options={{
         tabBarLabel: 'Saved Stores',
