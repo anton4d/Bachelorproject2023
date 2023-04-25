@@ -6,29 +6,31 @@ import WelcomeLogIn from "./WelcomeLogIn";
 import WelcomeSignIn from "./WelcomeSignIn";
 import WelcomeForgotPassword from "./WelcomeForgotPassword";
 import Walkthrough from "./Walkthrough";
-
+import WelcomeNavigation from "./WelcomeNavigation";
 
 
 const Stack = createNativeStackNavigator();
 const WelcomeStack = ({updateIsFirstTime}) => {
 
-  return (
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="welcome"
-                      component={WelcomeScreen}/>
-        <Stack.Screen name={"OneTimeLocation"}
-                      component={OneTimeLocation}/>
-        <Stack.Screen name={"Login"}
-                      component={WelcomeLogIn}/>
-        <Stack.Screen name={"SignIn"}
-                      component={WelcomeSignIn}/>
-        <Stack.Screen name={"ForgotPassword"}
-                      component={WelcomeForgotPassword}/>
-        <Stack.Screen name={"Walktrough"}>
-          {(props) => <Walkthrough  WelcomeDone={updateIsFirstTime} />}
-        </Stack.Screen>
+    return (
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="welcome"
+                          component={WelcomeScreen}/>
+            <Stack.Screen name={"OneTimeLocation"}
+                          component={OneTimeLocation}/>
+            <Stack.Screen name={"Login"}
+                          component={WelcomeLogIn}/>
+            <Stack.Screen name={"SignIn"}
+                          component={WelcomeSignIn}/>
+            <Stack.Screen name={"ForgotPassword"}
+                          component={WelcomeForgotPassword}/>
+            <Stack.Screen name={"navigation"}
+                          component={WelcomeNavigation}/>
+            <Stack.Screen name={"Walktrough"}>
+                {(props) => <Walkthrough WelcomeDone={updateIsFirstTime}/>}
+            </Stack.Screen>
         </Stack.Navigator>
-  );
+    );
 };
 
 

@@ -1,41 +1,53 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar,TextInput} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar, TextInput, ScrollView} from 'react-native';
 
 const OneTimeLocation = ({navigation}) => {
-    const [text, onChangeText] = React.useState('');
+    const [OneTimeLocation, onChangeOneTimeLocation] = React.useState('');
+    const [errorMessage, setErrorMessage] = React.useState('');
 
     const nejTak = () => {
-        console.log(text)
-        navigation.navigate("Login")
+        if(OneTimeLocation === ''){
+            setErrorMessage('du mangler at skrive engang lokalition')
+            return
+        }
+        console.log(OneTimeLocation)
+        navigation.navigate("Walktrough")
     }
     return (
         <SafeAreaView style={styles.container}>
+
             <StatusBar
                 animated={true}
                 barStyle={"default"}
             />
-            <View style={styles.welcomeContainer}>
-                <View style={styles.titleView}>
-                    <Text style={styles.title}>Engangs Lokalition</Text>
-                </View>
-                <View style={styles.descriptionView}>
-                    <Text style={styles.description}>
-                            Siden du ikke tillader gps lokalition kræver appen en general lokalition for at give dig butikker i dit generale omrøde
-                    </Text>
+
+                <View style={styles.welcomeContainer}>
+                    <View style={styles.titleView}>
+                        <Text style={styles.title}>Engangs Lokalition</Text>
+                    </View>
+                    <View style={styles.descriptionView}>
+                        <Text style={styles.description}>
+                            Siden du ikke tillader gps lokalition kræver appen en general lokalition for at give dig
+                            butikker i dit generale omrøde
+                        </Text>
+                    </View>
+
+                    <View style={styles.buttonView}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={onChangeOneTimeLocation}
+                            value={OneTimeLocation}
+                            placeholder="by, postnummer, gadenavn"
+                        />
+                        {errorMessage !== '' && (
+                            <Text style={styles.errorText}>{errorMessage}</Text>
+                        )}
+                        <TouchableOpacity style={styles.button} onPress={nejTak}>
+                            <Text style={styles.buttonText}> Godkend lokalition </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
-                <View style={styles.buttonView}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeText}
-                        value={text}
-                        placeholder="by, postnummer, gadenavn"
-                    />
-                    <TouchableOpacity style={styles.button} onPress={nejTak}>
-                        <Text style={styles.buttonText}> Godkend lokalition </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
         </SafeAreaView>
     );
 };

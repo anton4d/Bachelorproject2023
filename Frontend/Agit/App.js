@@ -74,19 +74,18 @@ function MyTabs() {
 async function checkIfFirstTimeOpeningAndNotDoneWithWelcome() {
   try {
     const value = await AsyncStorage.getItem('isFirstTimeOpeningAndNotDoneWithWelcome');
-    console.log("the value is " + value)
     if (value === null) {
       await AsyncStorage.setItem('isFirstTimeOpeningAndNotDoneWithWelcome', 'true');
-      console.log('This is the first time the app is opened');
+      //console.log('This is the first time the app is opened');
       return true;
     }
     else if(value === "true")  {
-      console.log('The app has been opened before but the welcome/setup is not done');
+      //console.log('The app has been opened before but the welcome/setup is not done');
       return true;
     }
     else {
-        console.log("the app has been opened before and welcome/setup is done")
-        await AsyncStorage.removeItem("isFirstTimeOpeningAndNotDoneWithWelcome")
+        //console.log("the app has been opened before and welcome/setup is done")
+        //await AsyncStorage.removeItem("isFirstTimeOpeningAndNotDoneWithWelcome")
         return false
       }
   } catch (error) {
@@ -106,7 +105,6 @@ function App() {
   const [isFirstTime, setIsFirstTime] = useState(false);
 
     const updateIsFirstTime = (value) => {
-        console.log(value)
         console.log("doneWelcome")
         setDoneWithWelcome(value)
         setIsFirstTime(value);
