@@ -3,17 +3,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/Mainscreens/Homescreen';
 import SearchScreen from './components/Mainscreens/Searchscreen';
 import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoresScreen from './components/Mainscreens/Storesscreen';
-import { View, Text,} from 'react-native';
+import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
 
 
 
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 
 function MyTabs() {
@@ -69,43 +71,69 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-async function checkIfFirstTimeOpening() {
+async function checkIfFirstTimeOpeningAndNotDoneWithWelcome() {
   try {
-    const value = await AsyncStorage.getItem('isFirstTimeOpening');
+    const value = await AsyncStorage.getItem('isFirstTimeOpeningAndNotDoneWithWelcome');
     if (value === null) {
-      await AsyncStorage.setItem('isFirstTimeOpening', 'false');
-      console.log('This is the first time the app is opened');
+      await AsyncStorage.setItem('isFirstTimeOpeningAndNotDoneWithWelcome', 'true');
+      //console.log('This is the first time the app is opened');
       return true;
-    } else {
-      console.log('The app has been opened before');
-      return false;
     }
+    else if(value === "true")  {
+      //console.log('The app has been opened before but the welcome/setup is not done');
+      return true;
+    }
+    else {
+        //console.log("the app has been opened before and welcome/setup is done")
+        //await AsyncStorage.removeItem("isFirstTimeOpeningAndNotDoneWithWelcome")
+        return false
+      }
   } catch (error) {
     console.log(error);
     return false;
   }
 }
+async function setDoneWithWelcome(value) {
+    try {
+        await AsyncStorage.setItem('isFirstTimeOpeningAndNotDoneWithWelcome', value.toString())
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 function App() {
-  const [isFirstTime, setIsFirstTime] = useState(true);
+  const [isFirstTime, setIsFirstTime] = useState(false);
+
+    const updateIsFirstTime = (value) => {
+        console.log("doneWelcome")
+        setDoneWithWelcome(value)
+        setIsFirstTime(value);
+
+    };
 
   useEffect(() => {
     async function checkFirstTime() {
-      const isFirstTimeOpening = await checkIfFirstTimeOpening();
+      const isFirstTimeOpening = await checkIfFirstTimeOpeningAndNotDoneWithWelcome();
       setIsFirstTime(isFirstTimeOpening);
     }
 
     checkFirstTime();
   }, []);
 
+
   return (
       <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+
         {isFirstTime ? (
-            <View><Text>This is the first time the app is opened</Text></View>
+            <Stack.Screen name="welcomeStack">
+                {(props) => <WelcomeStack  updateIsFirstTime={updateIsFirstTime} />}
+            </Stack.Screen>
 
         ) : (
-            <MyTabs />
+            <Stack.Screen name={"MyTabs"} component={MyTabs}/>
         )}
+          </Stack.Navigator>
       </NavigationContainer>
   );
 }
