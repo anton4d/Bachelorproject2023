@@ -68,16 +68,19 @@ const Test_Markers = [
       latitude: 55.37759675839189,
       longitude: 10.431609958211329,
     },
-  }];
-  {Test_Markers.map((marker, index) => (
-    <Marker
-      key={index}
-      coordinate={marker.coordinate}
-      title={marker.title}
-      image={require('../Mainscreens/assets/map_marker.png')}
-      description='Butikken, Adresse...'
-    />))}
-  
+  }
+];
+
+{Test_Markers.map((marker, index) => (
+  <Marker
+    key={index}
+    coordinate={marker.coordinate}
+    title={marker.title}
+    image={require('../Mainscreens/assets/map_marker.png')}
+    description='Butikken, Adresse...'
+  />
+))}
+
 const SearchScreen = () => { 
   
   const [origin, setOrigin] = useState<LatLng | null>();
@@ -174,7 +177,7 @@ const SearchScreen = () => {
           }}
         />
         <TouchableOpacity style={styles.button} onPress={traceRoute}>
-          <Text style={styles.buttonText}>Beregn Rute</Text>
+          <Text style={styles.buttonText}>Beregn Rute</Text> 
         </TouchableOpacity>
         {distance && duration ? (
           <View>
