@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         borderRadius: 11,
         backgroundColor: '#b3b3b3',
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     description: {
         fontSize: 16,
