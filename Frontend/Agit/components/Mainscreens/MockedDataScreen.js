@@ -37,10 +37,7 @@ const MOCKED_PRODUCTS_DATA = [
 const MockedDataScreen = () => {
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Image
-        style={styles.image}
-        source={item.image}
-      />
+      <Image style={styles.image} source={item.image} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
     </View>
@@ -52,17 +49,20 @@ const MockedDataScreen = () => {
         data={MOCKED_PRODUCTS_DATA}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.flatlistContentContainer}
       />
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#F5FCFF',
     padding: 16,
+  },
+  flatlistContentContainer: {
+    paddingBottom: 16,
   },
   item: {
     backgroundColor: '#FFFFFF',
@@ -79,18 +79,22 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    borderRadius: 8,
-    marginBottom: 12,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    resizeMode: 'cover',
   },
   title: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: 'bold',
     marginBottom: 8,
+    color: '#333333',
+    textAlign: 'center',
   },
   description: {
     fontSize: 14,
     lineHeight: 20,
     color: '#666666',
+    textAlign: 'center',
   },
 });
 
