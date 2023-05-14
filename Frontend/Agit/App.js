@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons, Feather, Fontisto, Ionicons } from 'react-native-vector-icons';
+import { MaterialCommunityIcons, Ionicons } from 'react-native-vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/Mainscreens/Homescreen';
 import SearchScreen from './components/Mainscreens/Searchscreen';
@@ -10,7 +10,7 @@ import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
 import StoresScreen from './components/Mainscreens/Storesscreen';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
-import { Image } from 'react-native';
+import Storescreen from './components/propScreens/Storescreen';
 
 
 
