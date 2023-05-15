@@ -85,7 +85,7 @@ async function checkIfFirstTimeOpeningAndNotDoneWithWelcome() {
     }
     else {
         //console.log("the app has been opened before and welcome/setup is done")
-        //await AsyncStorage.removeItem("isFirstTimeOpeningAndNotDoneWithWelcome")
+        await AsyncStorage.removeItem("isFirstTimeOpeningAndNotDoneWithWelcome")
         return false
       }
   } catch (error) {
