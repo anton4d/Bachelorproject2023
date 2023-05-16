@@ -7,10 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './components/Mainscreens/Homescreen';
 import SearchScreen from './components/Mainscreens/Searchscreen';
 import SettingsScreen from './components/Mainscreens/Settingsscreen';
+import StoreStack from './components/StackScreens/StoreStack';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
-import StoresScreen from './components/Mainscreens/Storesscreen';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
-import Storescreen from './components/propScreens/Storescreen';
 
 
 
@@ -50,15 +49,14 @@ function MyTabs() {
 
       <Tab.Screen
         name="Dine Gemte Butikker"
-        component={StoresScreen}
+        component={StoreStack}
         options={{
-          tabBarLabel: 'Gemte Butikker',
+          tabBarLabel: 'Stores',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bookmark" color={color} size={size} />
+            <MaterialCommunityIcons name="store" color={color} size={size} />
           ),
         }}
       />
-
       <Tab.Screen
         name="Søg Butikker"
         component={SearchScreen}
@@ -69,7 +67,6 @@ function MyTabs() {
           ),
         }}
       />
-
       <Tab.Screen
         name="Indstillinger"
         component={SettingsScreen}
