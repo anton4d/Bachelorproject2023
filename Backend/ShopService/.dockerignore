@@ -1,0 +1,8 @@
+.expo
+node_modules
+.gitignore
+.git
+Dockerfile
+.dockerignore
+.env
+seed.js

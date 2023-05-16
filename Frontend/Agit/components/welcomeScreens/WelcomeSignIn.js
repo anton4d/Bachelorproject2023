@@ -7,8 +7,15 @@ const WelcomeSignIn = ({navigation}) => {
     const [confirmPassword, onChangeconfirmPassword] = React.useState('')
     const [errorMessage, setErrorMessage] = React.useState('');
 
+    const API_URL = Platform.OS === 'ios' ? 'http://localhost:6666' : 'http://10.0.2.2:6666';
+
     const signin = () => {
         console.log(Email + " "+Password+ " "+ confirmPassword)
+        const payload = {
+            email: Email,
+            password: Password,
+            confirmPassword: confirmPassword,
+        };
         if (Password === '' || Email === '' || confirmPassword === ''){
             setErrorMessage('mangler kodord, confirm kodeord eller Email')
             return;
@@ -18,7 +25,26 @@ const WelcomeSignIn = ({navigation}) => {
             setErrorMessage('Passwords do not match');
             return;
         }
-        navigation.navigate("Walktrough")
+        fetch(`${API_URL}/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(async res => {
+            try {
+                const jsonRes = await res.json();
+                setErrorMessage(jsonRes.message)
+            } catch (err) {
+                console.log(err);
+            }
+        })
+            .catch(err => {
+                console.log(err);
+            });
+
+        //navigation.navigate("Walktrough")
     }
     const ForgotPassword = () => {
         navigation.navigate("ForgotPassword")
