@@ -4,7 +4,7 @@ import Slider from '@react-native-community/slider';
 
 const SettingsScreen = () => {
 
-  const [distance, setDistance] = React.useState('')
+  const [distance, setDistance] = React.useState(5)
 
   /*const dinmor = () => {
     setDistance=
@@ -12,8 +12,6 @@ const SettingsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Indstillinger</Text>
-      <View style={{ alignSelf: 'center', backgroundColor: 'black', height: 2, width: '70%' }} />
       <Text style={styles.subTitle}>
         Konto indstillinger
       </Text>
@@ -75,9 +73,9 @@ const SettingsScreen = () => {
           style={{ alignSelf: 'center', width: '100%', height: 40 }}
           minimumTrackTintColor="#03a43e"
           maximumTrackTintColor="#000000"
-          thumbTintColor="#81d29f"
+          thumbTintColor="#03a43e"
           minimumValue={1}
-          maximumValue={50}
+          maximumValue={20}
           value={5}
           step={1}
           onValueChange={setDistance}
@@ -95,6 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    backgroundColor: '#ffffff'
   },
   title: {
     fontSize: 24,
@@ -128,16 +127,19 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingEnd: 8,
     paddingVertical: 4,
-    color: '#5065ff'
+    color: '#03a43e',
+    fontWeight: 'bold'
   },
   userDetailsBox: {
     flexWrap: 'wrap',
     marginHorizontal: '4%',
     width: '92%',
     borderRadius: 11,
-    backgroundColor: '#b3b3b3',
+    backgroundColor: '#e6f6ec',
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderColor: '#03a43e',
+    borderWidth: 2,
   },
   description: {
     fontSize: 16,
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 11,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#b3b3b3',
+    backgroundColor: '#03a43e',
     width: 'auto'
   },
   buttonText: {
@@ -163,6 +165,8 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     justifyContent: 'center',
     alignItems: 'center',
+    color: 'white',
+    fontWeight: 'bold'
   },
 });
 

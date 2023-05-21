@@ -5,39 +5,47 @@ import { MaterialCommunityIcons, Ionicons } from 'react-native-vector-icons';
 const DATA = [
     {
         id: '1',
-        title: 'First Item',
-        price: '9,99'
+        title: 'BANANER',
+        price: '2,75',
+        image: require('../../assets/ProductMockImages/banana.png')
     },
     {
         id: '2',
-        title: 'Second Item',
-        price: '9,99'
+        title: 'MINIMÆLK 0,4% FEDT',
+        price: '11,95',
+        image: require('../../assets/ProductMockImages/Milk.png')
     },
     {
         id: '3',
-        title: 'Third Item',
-        price: '9,99'
+        title: 'SKRABEÆG M/L',
+        price: '20,00',
+        image: require('../../assets/ProductMockImages/Egg.png')
     },
     {
         id: '4',
-        title: '4 Item',
-        price: '9,99'
+        title: 'HAMBURGERRYG I SKIVER',
+        price: '17,50',
+        image: require('../../assets/ProductMockImages/Hamburgerryg.png')
     },
     {
         id: '5',
-        title: '5 Item',
-        price: '9,99'
+        title: 'PEPSI MAX',
+        price: '15,00',
+        image: require('../../assets/ProductMockImages/PepsiMax.png')
     },
     {
         id: '6',
-        title: '6 Item',
-        price: '9,99'
+        title: 'YOGHURTBOLLER',
+        price: '15,00',
+        image: require('../../assets/ProductMockImages/YoghurtBoller.png')
     },
 ];
 
 const Storescreen = () => {
 
     const { windowHeight, windowWidth } = useWindowDimensions();
+
+    const [addrs, setAddrs] = React.useState('Addrs value goes here')
 
     const [like, setLike] = React.useState(false)
 
@@ -64,7 +72,7 @@ const Storescreen = () => {
                     marginBottom: 20, marginTop: 8
                 }}>
                     <Ionicons name='md-location-sharp' color='blue' style={{ fontSize: 22, }} />
-                    <Text style={{ fontSize: 16, }}>Adressee variabel her</Text>
+                    <Text style={{ fontSize: 16, }}>{addrs}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
                     <View style={{
@@ -98,7 +106,7 @@ const Storescreen = () => {
                     horizontal
                     style={styles.discountsList}
                     data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} />}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -111,7 +119,7 @@ const Storescreen = () => {
                     horizontal
                     style={styles.discountsList}
                     data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} />}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -119,18 +127,18 @@ const Storescreen = () => {
     );
 };
 
-function Item({ title, price }) {
+function Item({ title, price, image }) {
     return (
         <TouchableOpacity>
             <View style={styles.discountItem}>
                 <View style={styles.discountItemImageView}>
-                    <Image source={require('../../assets/adaptive-icon.png')}
+                    <Image source={image}
                         style={styles.discountItemImage}
                         resizeMode='contain'
                     />
                 </View>
-                <Text style={styles.discountItemText}>{title}</Text>
-                <Text style={styles.discountItemText}>{price}</Text>
+                <Text style={styles.discountItemText} numberOfLines={2}>{title}</Text>
+                <Text style={styles.discountItemPrice}>{price}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -186,15 +194,15 @@ const styles = StyleSheet.create({
     },
     discountItem: {
         width: 100,
-        height: 130,
+        height: 140,
         alignContent: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     discountItemImage: {
-        maxWidth: 80,
-        maxHeight: 80,
+        maxWidth: 74,
+        maxHeight: 74,
         alignSelf: 'center',
-        backgroundColor: 'yellow'
+        borderRadius: 6,
     },
     discountItemImageView: {
         width: 80,
@@ -202,14 +210,24 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignContent: 'center',
         justifyContent: 'center',
+        borderColor: '#03a43e',
+        borderWidth: 2,
+        borderRadius: 6,
     },
     discountItemText: {
-        fontSize: 16,
+        fontSize: 14,
         alignSelf: 'center',
+        textAlign: 'center'
+    },
+    discountItemPrice: {
+        fontSize: 14,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     borderLineView: {
         borderBottomWidth: 3,
-        borderColor: '#839D69',
+        borderColor: '#03a43e',
     },
     buttonView: {
         borderRadius: 9,
@@ -218,7 +236,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         height: 'auto',
         width: 'auto',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        borderColor: '#03a43e',
     },
     buttonText: {
         fontSize: 16,
@@ -227,10 +246,13 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         justifyContent: 'center',
         alignItems: 'center',
+        color: '#03a43e',
+        fontWeight: 'bold'
     },
     IconStyle: {
         fontSize: 26,
         paddingTop: 2,
+        color: '#03a43e'
     },
 });
 

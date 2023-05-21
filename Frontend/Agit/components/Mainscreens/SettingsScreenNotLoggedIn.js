@@ -2,18 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 
+/*<Text style={styles.title}>Indstillinger</Text>
+<View style={{ alignSelf: 'center', backgroundColor: 'black', height: 2, width: '70%', }} /> */
+
 const SettingsScreenNotLoggedIn = () => {
+
+    const [distance, setDistance] = React.useState(5)
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Indstillinger</Text>
-            <View style={{ alignSelf: 'center', backgroundColor: 'black', height: 2, width: '70%', }} />
             <Text style={styles.subTitle}>
                 Konto indstillinger
             </Text>
             <View style={{
                 flexWrap: 'wrap', flexDirection: 'row', alignSelf: 'center', justifyContent: 'center',
-                alignItems: 'center', marginTop: 8,
+                alignItems: 'center', marginTop: 14,
             }}>
                 <TouchableOpacity style={styles.buttonView}>
                     <Text style={styles.buttonText}>
@@ -58,15 +61,18 @@ const SettingsScreenNotLoggedIn = () => {
                     Maksimal afstand
                 </Text>
                 <Text style={{ fontSize: 16, textAlign: 'right', paddingEnd: 8, paddingVertical: 4 }}>
-                    {'(valgt max afstand)'}
+                    {distance} km.
                 </Text>
                 <Slider
                     style={{ alignSelf: 'center', width: '100%', height: 40 }}
-                    minimumValue={1}
-                    maximumValue={100}
                     minimumTrackTintColor="#03a43e"
                     maximumTrackTintColor="#000000"
-                    thumbTintColor="#81d29f"
+                    thumbTintColor="#03a43e"
+                    minimumValue={1}
+                    maximumValue={20}
+                    value={5}
+                    step={1}
+                    onValueChange={setDistance}
                 />
             </View>
             <Text style={styles.description}>
@@ -81,6 +87,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        backgroundColor: '#ffffff'
     },
     title: {
         fontSize: 24,
@@ -114,16 +121,19 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         paddingEnd: 8,
         paddingVertical: 4,
-        color: '#5065ff'
+        color: '#03a43e',
+        fontWeight: 'bold'
     },
     userDetailsBox: {
         flexWrap: 'wrap',
         marginHorizontal: '4%',
         width: '92%',
         borderRadius: 11,
-        backgroundColor: '#b3b3b3',
+        backgroundColor: '#e6f6ec',
         justifyContent: 'space-between',
         flexDirection: 'row',
+        borderColor: '#03a43e',
+        borderWidth: 2
     },
     description: {
         fontSize: 16,
@@ -137,8 +147,8 @@ const styles = StyleSheet.create({
         borderRadius: 11,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#b3b3b3',
-        width: 'auto'
+        backgroundColor: '#03a43e',
+        width: 'auto',
     },
     buttonText: {
         fontSize: 16,
@@ -147,6 +157,8 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         justifyContent: 'center',
         alignItems: 'center',
+        color: '#ffffff',
+        fontWeight: 'bold',
     },
 });
 
