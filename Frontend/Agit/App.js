@@ -10,6 +10,8 @@ import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoreStack from './components/StackScreens/StoreStack';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
+import Storescreen from './components/propScreens/StoreScreen';
+import ProductScreen from './components/propScreens/ProductScreen';
 
 
 
@@ -24,14 +26,14 @@ function MyTabs() {
       initialRouteName="Home"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#ffffff', borderBottomColor: '#839D69', borderBottomWidth: 2,
+          backgroundColor: '#ffffff', borderBottomColor: '#03a43e', borderBottomWidth: 2,
         },
         headerTitleAlign: 'center',
-        headerTintColor: '#839D69',
-        tabBarStyle: { backgroundColor: '#ffffff', borderTopColor: '#839D69', borderTopWidth: 2, borderStartColor: '839D69' },
+        headerTintColor: '#03a43e',
+        tabBarStyle: { backgroundColor: '#ffffff', borderTopColor: '#03a43e', borderTopWidth: 2,},
         tabBarActiveTintColor: '#ffffff',
-        tabBarActiveBackgroundColor: '#839D69',
-        tabBarInactiveTintColor: '#839D69',
+        tabBarActiveBackgroundColor: '#03a43e',
+        tabBarInactiveTintColor: '#03a43e',
         tabBarInactiveBackgroundColor: '#ffffff',
         tabBarLabelStyle: { fontSize: 13, fontWeight: 'bold' },
       }}
@@ -72,6 +74,16 @@ function MyTabs() {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Indstillinger',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="settings-sharp" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="test"
+        component={ProductScreen}
+        options={{
+          tabBarLabel: 'test',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings-sharp" color={color} size={size} />
           ),

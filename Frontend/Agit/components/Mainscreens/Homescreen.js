@@ -1,36 +1,60 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, FlatList, useWindowDimensions, TouchableOpacity } from 'react-native';
 
-const DATA = [
+const productData = [
   {
-      id: '1',
-      title: 'First Item',
-      price: '9,99'
+    id: '1',
+    title: 'BANANER',
+    price: '2,75',
+    image: require('../../assets/ProductMockImages/banana.png')
   },
   {
-      id: '2',
-      title: 'Second Item',
-      price: '9,99'
+    id: '2',
+    title: 'MINIMÆLK 0,4% FEDT',
+    price: '11,95',
+    image: require('../../assets/ProductMockImages/Milk.png')
   },
   {
-      id: '3',
-      title: 'Third Item',
-      price: '9,99'
+    id: '3',
+    title: 'SKRABEÆG M/L',
+    price: '20,00',
+    image: require('../../assets/ProductMockImages/Egg.png')
   },
   {
-      id: '4',
-      title: '4 Item',
-      price: '9,99'
+    id: '4',
+    title: 'HAMBURGERRYG I SKIVER',
+    price: '17,50',
+    image: require('../../assets/ProductMockImages/Hamburgerryg.png')
   },
   {
-      id: '5',
-      title: '5 Item',
-      price: '9,99'
+    id: '5',
+    title: 'PEPSI MAX',
+    price: '15,00',
+    image: require('../../assets/ProductMockImages/PepsiMax.png')
   },
   {
-      id: '6',
-      title: '6 Item',
-      price: '9,99'
+    id: '6',
+    title: 'YOGHURTBOLLER',
+    price: '15,00',
+    image: require('../../assets/ProductMockImages/YoghurtBoller.png')
+  },
+];
+
+const SavedShopData = [
+  {
+    id: '1',
+    addrs: 'Roersvej 33A, 5000 Odense',
+    image: require('../../assets/nettoSmall.png')
+  },
+  {
+    id: '2',
+    addrs: 'Vesterbro 39-51, 5000 Odense',
+    image: require('../../assets/fotexSmall.png')
+  },
+  {
+    id: '3',
+    addrs: 'Niels Bohrs Alle 150, 5230 Odense',
+    image: require('../../assets/bilkaSmall.png')
   },
 ];
 
@@ -56,8 +80,8 @@ const HomeScreen = () => {
         <FlatList
           horizontal
           style={styles.discountsList}
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+          data={SavedShopData}
+          renderItem={({ item }) => <SavedShopItem addrs={item.addrs} image={item.image} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -67,8 +91,8 @@ const HomeScreen = () => {
         <FlatList
           horizontal
           style={styles.discountsList}
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+          data={productData}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -78,8 +102,8 @@ const HomeScreen = () => {
         <FlatList
           horizontal
           style={styles.discountsList}
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+          data={productData}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -89,8 +113,8 @@ const HomeScreen = () => {
         <FlatList
           horizontal
           style={styles.discountsList}
-          data={DATA}
-          renderItem={({ item }) => <Item title={item.title} price={item.price} />}
+          data={productData}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
           keyExtractor={item => item.id}
         />
       </ScrollView>
@@ -98,18 +122,34 @@ const HomeScreen = () => {
   );
 };
 
-function Item({ title, price, navigation }) {
+function DiscountItem({ title, price, image, }) {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Storescreen')}>
+    <TouchableOpacity>
       <View style={styles.discountItem}>
         <View style={styles.discountItemImageView}>
-          <Image source={require('../../assets/adaptive-icon.png')}
+          <Image source={image}
             style={styles.discountItemImage}
-            resizeMode='cover'
+            resizeMode='contain'
           />
         </View>
-        <Text style={styles.discountItemText}>{title}</Text>
-        <Text style={styles.discountItemText}>{price}</Text>
+        <Text style={styles.discountItemText} numberOfLines={2}>{title}</Text>
+        <Text style={styles.discountItemPrice}>{price}</Text>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+function SavedShopItem({ addrs, image, }) {
+  return (
+    <TouchableOpacity>
+      <View style={styles.discountItem}>
+        <View style={styles.discountItemImageView}>
+          <Image source={image}
+            style={styles.discountItemImage}
+            resizeMode='contain'
+          />
+        </View>
+        <Text style={styles.discountItemText} numberOfLines={3}>{addrs}</Text>
       </View>
     </TouchableOpacity>
   )
@@ -130,7 +170,6 @@ const styles = StyleSheet.create({
   contentView: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#b3b666',
   },
   subTitleBox: {
     justifyContent: 'center',
@@ -150,15 +189,15 @@ const styles = StyleSheet.create({
   },
   discountItem: {
     width: 100,
-    height: 130,
+    height: 137,
     alignContent: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   discountItemImage: {
-    maxWidth: 80,
-    maxHeight: 80,
+    maxWidth: 74,
+    maxHeight: 74,
     alignSelf: 'center',
-    backgroundColor: 'yellow'
+    borderRadius: 6,
   },
   discountItemImageView: {
     width: 80,
@@ -166,14 +205,24 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    borderColor: '#03a43e',
+    borderWidth: 2,
+    borderRadius: 6,
   },
   discountItemText: {
-    fontSize: 16,
+    fontSize: 14,
     alignSelf: 'center',
+    textAlign: 'center'
+  },
+  discountItemPrice: {
+    fontSize: 14,
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   borderLineView: {
     borderBottomWidth: 3,
-    borderColor: '#839D69',
+    borderColor: '#03a43e',
   }
 });
 
