@@ -10,7 +10,7 @@ import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoreStack from './components/StackScreens/StoreStack';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
-import Storescreen from './components/propScreens/StoreScreen';
+import StoreScreen from './components/propScreens/StoreScreen';
 import ProductScreen from './components/propScreens/ProductScreen';
 
 
@@ -74,16 +74,6 @@ function MyTabs() {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Indstillinger',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-sharp" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="test"
-        component={ProductScreen}
-        options={{
-          tabBarLabel: 'test',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings-sharp" color={color} size={size} />
           ),
