@@ -22,7 +22,7 @@ const makeAPICall = async (id) => {
         const clearances = response.data.clearances;
 
         const offers = clearances.map((clearance) => ({
-            shopid: id,
+            storeid: id,
             ean: clearance.offer.ean,
             name: clearance.product.description,
             discount: clearance.offer.discount,
@@ -47,7 +47,7 @@ const updateOffers = async (offers, id) => {
         const allOffers = [];
         const oldOffers = await Offer.findAll({
             where: {
-                shopid: {
+                storeid: {
                     [Op.eq]: id
                 }
             }

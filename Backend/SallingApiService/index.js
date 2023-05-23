@@ -1,6 +1,6 @@
 require('dotenv').config();
 const {saveOffer} = require('./offers/offerController')
-const {weeklyApiCall, saveStores, getAllStores} = require('./shops/shopController');
+const {weeklyApiCall, saveStores, getAllStores} = require('./store/storeController');
 const cron = require('cron');
 const sequelize = require('./utils/database.js');
 const client = require("./utils/redis")
@@ -8,7 +8,7 @@ sequelize.sync()
 client.connect();
 
 // Schedule the function to run every Sunday at 01:00
-const shopJob = new cron.CronJob('* * 1 * * 0', async function() {
+const storeJob = new cron.CronJob('* * 1 * * 0', async function() {
     const stores = await weeklyApiCall();
     saveStores(stores);
 }, null,
@@ -24,5 +24,5 @@ const offerJob = new cron.CronJob('* * 0 * * *', async function() {
     'Europe/Copenhagen'
 );
 
-shopJob.start()
+storeJob.start()
 offerJob.start()

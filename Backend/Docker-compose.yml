@@ -64,9 +64,9 @@ services:
       - NODE_ENV=development
       - PORT=3000
 
-  shopService:
+  storeService:
     build:
-      context: ./ShopService
+      context: StoreService
       dockerfile: Dockerfile
     ports:
       - '6667:3000'
@@ -130,7 +130,7 @@ services:
       - NODE_ENV=development
       - REDIS_PORT=6379
       - REDIS_HOST=redis
-      - SALLINGAPISHOP=https://api.sallinggroup.com/v2/stores
+      - SALLINGAPISTORE=https://api.sallinggroup.com/v2/stores
       - SALLINGAPIOFFER=https://api.sallinggroup.com/v1/food-waste/
       - TOKEN=2290a1bd-4b27-40e7-8a64-9aa736bd1ae3
 

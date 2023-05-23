@@ -4,7 +4,7 @@ const sequelize = require('../utils/database')
 class offer extends Model {}
 
 offer.init({
-    shopid: {
+    storeid: {
       type: DataTypes.STRING,
       allowNull: false
     },

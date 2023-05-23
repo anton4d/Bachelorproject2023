@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const Shop = require('./models/shop');
+const Store = require('./models/store');
 const seedData = require("./seed")
 const sequelize = require('./utils/database.js');
 
@@ -25,7 +25,7 @@ if (process.env.SEED === "true") {
     // If true, sync the database and insert seed data
     (async () => {
         await sequelize.sync({ force: true }); // drop and recreate tables
-        await Shop.bulkCreate(seedData);
+        await Store.bulkCreate(seedData);
         console.log('Seed data inserted successfully!');
     })();
 } else {

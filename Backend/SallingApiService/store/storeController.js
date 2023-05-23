@@ -1,10 +1,10 @@
-const Shop = require("../models/shop")
+const store = require("../models/store")
 
 const axios = require('axios');
 
 const token = process.env.Token
 
-const url = process.env.SALLINGAPISHOP
+const url = process.env.SALLINGAPISTORE
 
 const Country = "dk"
 const Page = 1
@@ -47,14 +47,14 @@ const saveStores = async (stores) => {
     try {
         for (const store of stores) {
             // Check if a store with the same ID already exists in the database
-            const existingStore = await Shop.findOne({ where: { id: store.id } });
+            const existingStore = await store.findOne({ where: { id: store.id } });
 
             if (existingStore) {
                 // Update the existing store
-                await Shop.update(store, { where: { id: store.id } });
+                await store.update(store, { where: { id: store.id } });
             } else {
                 // Insert a new store
-                await Shop.create(store);
+                await store.create(store);
             }
         }
 
@@ -65,7 +65,7 @@ const saveStores = async (stores) => {
 };
 
 const getAllStores = async () => {
-    return await Shop.findAll()
+    return await store.findAll()
 }
 
 

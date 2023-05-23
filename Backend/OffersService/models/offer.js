@@ -4,7 +4,7 @@ const sequelize = require('../utils/database'); // Import the Sequelize instance
 class offer extends Model {} // Define the "offer" model as a subclass of Sequelize's Model class
 
 offer.init({
-    shopid: {
+    storeid: {
         type: DataTypes.STRING,
         allowNull: false
     },
