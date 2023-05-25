@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import StoresScreen from '../Mainscreens/StoresScreen';
+import StoressScreen from '../Mainscreens/Storesscreen';
 import MockedDataScreen from '../Mainscreens/MockedDataScreen';
 
 
@@ -10,7 +10,7 @@ const StoreStack = () => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Stores"
-                          component={StoresScreen}/>
+                          component={StoressScreen}/>
             <Stack.Screen name={"MockedDataScreen"}
                           component={MockedDataScreen}/>
         </Stack.Navigator>

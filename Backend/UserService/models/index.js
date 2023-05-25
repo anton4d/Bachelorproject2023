@@ -3,7 +3,7 @@
 const User = require('./user');
 
 // Import the `Settings` model.
-const Settings = require('./settings');
+const Settings = require('./Settings');
 
 // Establish a relationship where `Settings` model belongs to `User` model.
 Settings.belongsTo(User);

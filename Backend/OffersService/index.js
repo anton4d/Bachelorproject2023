@@ -4,7 +4,7 @@ require('dotenv').config(); // Load environment variables from .env file
 const offer = require('./models/offer'); // Import the offer model
 const seedData = require("./seed"); // Import seed data
 const sequelize = require('./utils/database.js'); // Import Sequelize for database management
-
+const redisClient = require('./utils/redis'); // Import the Redis client
 const router = require('./routes/routes.js'); // Import the router module
 
 const app = express(); // Create an instance of Express
@@ -25,10 +25,13 @@ if (process.env.SEED === "true") {
     (async () => {
         await sequelize.sync({ force: true }); // Drop and recreate tables
         await offer.bulkCreate(seedData); // Insert seed data into the database
+        redisClient.connect();
         console.log('Seed data inserted successfully!');
     })();
 } else {
     sequelize.sync(); // Sync the models with the database
+    redisClient.connect();
+
 }
 
 app.use(router); // Use the router module for routing

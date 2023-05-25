@@ -19,7 +19,7 @@ const stores = async (req, res, next) => {
 const getStoresByLocation = async (req, res, next) => {
     const { latitude, longitude, radius } = req.body;
     const radiusInMeter = radius * 1000
-    console.log(`latitude: ${latitude}, longitude: ${longitude}, radiusInMeter: ${radiusInMeter}`);
+    //console.log(`latitude: ${latitude}, longitude: ${longitude}, radiusInMeter: ${radiusInMeter}`);
     try {
         const stores = await Store.findAll();
         const filteredStores = stores.filter((store) =>

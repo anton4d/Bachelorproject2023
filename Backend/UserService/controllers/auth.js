@@ -22,7 +22,7 @@ const signup = async (req, res, next) => {
         const dbUser = await User.findOne({
             where: {
                 email: {
-                    [Op.eq]: req.body.email
+                    [Op.eq]: req.body.email//sequelize operator being the op.eg
                 }
             }
         });

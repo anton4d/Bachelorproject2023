@@ -17,7 +17,9 @@ const storeOffers = async (req, res, next) => {
     const { storeId } = req.body; // Extract the storeId from the request body
 
     try {
-        const redisKey = storeId.toString(); // Convert storeId to string if it's not already
+        const redisKey = storeId.toString();// Convert storeId to string if it's not already
+
+
 
         // Check if the offers exist in Redis
         const offersJSON = await redisClient.get(redisKey);

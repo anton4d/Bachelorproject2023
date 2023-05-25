@@ -10,8 +10,6 @@ import SettingsScreen from './components/Mainscreens/Settingsscreen';
 import StoreStack from './components/StackScreens/StoreStack';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
-import StoreScreen from './components/propScreens/StoreScreen';
-import ProductScreen from './components/propScreens/ProductScreen';
 
 
 

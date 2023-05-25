@@ -1,7 +1,7 @@
 version: '3.3'
 services:
 
-  db:
+  database:
     image: mysql:5.7
     restart: always
     environment:
@@ -28,7 +28,7 @@ services:
     image: adminer
     container_name: adminer-docker
     depends_on:
-      - db
+      - database
     ports:
       - '8080:8080'
     networks:
@@ -44,14 +44,14 @@ services:
     networks:
       - redis-network
 
-  userService:
+  userservice:
     build:
       context: ./UserService
       dockerfile: Dockerfile
     ports:
       - '6666:3000'
     depends_on:
-      - db
+      - database
     networks:
       - express-mysql-network
     restart: on-failure
@@ -59,19 +59,19 @@ services:
       - DB=db
       - DBUser=user
       - DBPassword=password
-      - DBHost=db
+      - DBHost=database
       - DBPort=3306
       - NODE_ENV=development
       - PORT=3000
 
-  storeService:
+  storeservice:
     build:
-      context: StoreService
+      context: ./storeservice
       dockerfile: Dockerfile
     ports:
       - '6667:3000'
     depends_on:
-      - db
+      - database
     networks:
       - express-mysql-network
     restart: on-failure
@@ -79,19 +79,19 @@ services:
       - DB=db
       - DBUser=user
       - DBPassword=password
-      - DBHost=db
+      - DBHost=database
       - DBPort=3306
       - NODE_ENV=development
       - PORT=3000
 
-  offerService:
+  offerservice:
     build:
-      context: ./OffersService
+      context: ./offersservice
       dockerfile: Dockerfile
     ports:
       - '6668:3000'
     depends_on:
-      - db
+      - database
       - redis
     networks:
       - express-mysql-network
@@ -101,21 +101,21 @@ services:
       - DB=db
       - DBUser=user
       - DBPassword=password
-      - DBHost=db
+      - DBHost=database
       - DBPort=3306
       - NODE_ENV=development
       - REDIS_PORT=6379
       - REDIS_HOST=redis
       - PORT=3000
 
-  sallingApiService:
+  sallingapiservice:
     build:
-      context: ./SallingApiService
+      context: ./sallingapiservice
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
     depends_on:
-      - db
+      - database
       - redis
     networks:
       - express-mysql-network
@@ -125,14 +125,12 @@ services:
       - DB=db
       - DBUser=user
       - DBPassword=password
-      - DBHost=db
+      - DBHost=database
       - DBPort=3306
       - NODE_ENV=development
       - REDIS_PORT=6379
       - REDIS_HOST=redis
       - SALLINGAPISTORE=https://api.sallinggroup.com/v2/stores
-      - SALLINGAPIOFFER=https://api.sallinggroup.com/v1/food-waste/
-      - TOKEN=2290a1bd-4b27-40e7-8a64-9aa736bd1ae3
 
 volumes:
   my-db:
