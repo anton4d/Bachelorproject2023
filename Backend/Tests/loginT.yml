@@ -1,0 +1,23 @@
+config:
+  target: "http://localhost:6666"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: "Warming up"
+
+  payload:
+    order: "sequence"
+    path: "./user.csv"
+    fields:
+      - "email"
+      - "password"
+      - "confirmPassword"
+scenarios:
+  - name: "login ip flow"
+    flow:
+      - post:
+          url: "/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+            confirmPassword: "{{ confirmPassword }}"

@@ -5,24 +5,27 @@ var validator = require('validator'); // Import validator for input validation
 const { User, Settings } = require('../models'); // Import User and Settings models
 
 const signup = async (req, res, next) => {
+    // Destructure values from req.body
+    const { email, password, confirmPassword } = req.body;
     // Check if required fields are missing
-    if (!req.body.email || !req.body.password || !req.body.confirmPassword) {
+    if (!email || !password || !confirmPassword) {
         return res.status(400).json({ message: "bruger infomation mangler" });
     }
     // Check if password and confirmPassword match
-    if (req.body.password !== req.body.confirmPassword) {
+    if (password !== confirmPassword) {
         return res.status(400).json({ message: "password do not match" });
     }
     // Check if email is a valid email format
-    if (!validator.isEmail(req.body.email)){
+    if (!validator.isEmail(email)){
         return res.status(400).json({ message: "email is not correct email" });
     }
+
     try {
         // Check if user with the same email already exists
         const dbUser = await User.findOne({
             where: {
                 email: {
-                    [Op.eq]: req.body.email//sequelize operator being the op.eg
+                    [Op.eq]: email.toString()
                 }
             }
         });
@@ -30,9 +33,9 @@ const signup = async (req, res, next) => {
             return res.status(409).json({ message: "email already exists" });
         } else {
             // Create a new user with hashed password
-            const passwordHash = await bcrypt.hash(req.body.password, 12);
+            const passwordHash = await bcrypt.hash(password.toString(), 12);
             const user = await User.create({
-                email: req.body.email,
+                email,
                 password: passwordHash,
             });
             // Create settings for the user
@@ -46,17 +49,21 @@ const signup = async (req, res, next) => {
         res.status(502).json({ message: "error while creating the user" });
     }
 };
+
 const login = async (req, res, next) => {
+    const { email, password, confirmPassword } = req.body;
+
     // Check if email and password are provided
-    if (!req.body.email || !req.body.password) {
+    if (!email || !password) {
         return res.status(400).json({ message: "email/password mangler" });
     }
+
     try {
         // Find the user with the provided email
         const dbUser = await User.findOne({
             where: {
                 email: {
-                    [Op.eq]: req.body.email
+                    [Op.eq]: email
                 }
             }
         });
@@ -73,7 +80,7 @@ const login = async (req, res, next) => {
                 }
             });
             // Compare the provided password with the stored hashed password
-            bcrypt.compare(req.body.password, dbUser.password, (err, compareRes) => {
+            bcrypt.compare(password.toString(), dbUser.password, (err, compareRes) => {
                 if (err) { // Error while comparing
                     res.status(502).json({ message: "error while checking user password" });
                 } else if (compareRes) { // Passwords match

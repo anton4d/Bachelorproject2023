@@ -1,0 +1,21 @@
+config:
+  target: "http://localhost:6668"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      name: "Warming up"
+    - duration: 140
+      arrivalRate: 20
+      rampTo: 100
+      name: "Ramping up"
+
+scenarios:
+  - name: "Sign up flow"
+    flow:
+      - get:
+          url: "/offers"
+      - think: 10
+      - post:
+          url: "/storeOffers"
+          json:
+            storeId: "efba0457-090e-4132-81ba-c72b4c8e7fee"

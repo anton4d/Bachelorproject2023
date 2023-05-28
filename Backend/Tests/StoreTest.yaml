@@ -1,0 +1,31 @@
+config:
+  target: "http://localhost:6667"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      name: "get alle stores"
+    - duration: 140
+      arrivalRate: 20
+      rampTo: 100
+      name: "get store by id"
+    - duration: 140
+      arrivalRate: 20
+      rampTo: 100
+      name: "get store by location"
+
+scenarios:
+  - name: "Sign up flow"
+    flow:
+      - get:
+          url: "/stores"
+      - think: 10
+      - post:
+          url: "/storeById"
+          json:
+            storeId: "efba0457-090e-4132-81ba-c72b4c8e7fee"
+      - post:
+          url: "/storesByLocation"
+          json:
+            latitude: "55.407370"
+            longitude: "10.437420"
+            radius: "5"
