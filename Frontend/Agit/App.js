@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Ionicons } from 'react-native-vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './components/Mainscreens/Homescreen';
-import SearchScreen from './components/Mainscreens/Searchscreen';
-import SettingsScreen from './components/Mainscreens/Settingsscreen';
+import HomeScreen from './components/Mainscreens/HomeScreen';
+import SearchScreen from './components/Mainscreens/SearchScreen';
+import SettingsScreen from './components/Mainscreens/SettingsScreen';
 import StoreStack from './components/StackScreens/StoreStack';
 import SettingsScreenNotLoggedIn from './components/Mainscreens/SettingsScreenNotLoggedIn';
 import WelcomeStack from "./components/welcomeScreens/WelcomeStack";
@@ -48,17 +48,17 @@ function MyTabs() {
       />
 
       <Tab.Screen
-        name="Dine Gemte Butikker"
+        name="Gemte Butikker"
         component={StoreStack}
         options={{
-          tabBarLabel: 'Stores',
+          tabBarLabel: 'Gemte Butikker',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="store" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Søg Butikker"
+        name="Søg"
         component={SearchScreen}
         options={{
           tabBarLabel: 'Søg',

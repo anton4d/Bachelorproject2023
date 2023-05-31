@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import StoressScreen from '../Mainscreens/Storesscreen';
+import StoressScreen from '../Mainscreens/StoresScreen';
 import MockedDataScreen from '../Mainscreens/MockedDataScreen';
 
 
