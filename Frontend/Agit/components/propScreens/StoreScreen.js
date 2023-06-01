@@ -41,7 +41,7 @@ const DATA = [
     },
 ];
 
-const Storescreen = () => {
+const StoreScreen = () => {
 
     const { windowHeight, windowWidth } = useWindowDimensions();
 
@@ -256,4 +256,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Storescreen;
+export default StoreScreen;

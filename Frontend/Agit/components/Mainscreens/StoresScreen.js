@@ -95,7 +95,7 @@ function Item({ item, navigation }) {
   );
 }
 
-export default class Storesscreen extends React.Component {
+export default class StoresScreen extends React.Component {
   state = {
     data: [
       {
