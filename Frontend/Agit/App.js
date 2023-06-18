@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons, Ionicons } from 'react-native-vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './components/Mainscreens/HomeScreen';
+import HomeStack from "./components/StackScreens/HomeStack";
 import SearchScreen from './components/Mainscreens/SearchScreen';
 import SettingsScreen from './components/Mainscreens/SettingsScreen';
 import StoreStack from './components/StackScreens/StoreStack';
@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Hjem"
       screenOptions={{
         headerStyle: {
           backgroundColor: '#ffffff', borderBottomColor: '#03a43e', borderBottomWidth: 2,
@@ -38,7 +38,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Hjem"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarLabel: 'Hjem',
           tabBarIcon: ({ color, size }) => (

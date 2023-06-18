@@ -41,7 +41,11 @@ const DATA = [
     },
 ];
 
-const StoreScreen = () => {
+const StoreScreen = ({navigation}) => {
+
+    const openscreen = () => {
+        navigation.navigate("product")
+    }
 
     const { windowHeight, windowWidth } = useWindowDimensions();
 
@@ -106,7 +110,7 @@ const StoreScreen = () => {
                     horizontal
                     style={styles.discountsList}
                     data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} />}
+                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} onPress={() => openscreen()}  />}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -119,7 +123,7 @@ const StoreScreen = () => {
                     horizontal
                     style={styles.discountsList}
                     data={DATA}
-                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} />}
+                    renderItem={({ item }) => <Item title={item.title} price={item.price} image={item.image} onPress={() => openscreen()}/>}
                     keyExtractor={item => item.id}
                 />
             </View>
@@ -127,9 +131,9 @@ const StoreScreen = () => {
     );
 };
 
-function Item({ title, price, image }) {
+function Item({ title, price, image , onPress}) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View style={styles.discountItem}>
                 <View style={styles.discountItemImageView}>
                     <Image source={image}

@@ -8,7 +8,9 @@ const WelcomeSignIn = ({navigation}) => {
     const [errorMessage, setErrorMessage] = React.useState('');
 
     const API_URL = Platform.OS === 'ios' ? 'http://localhost:6666' : 'http://10.0.2.2:6666';
-
+    const changeScreen= () => {
+        navigation.navigate("navigation")
+    }
     const signin = () => {
         console.log(Email + " "+Password+ " "+ confirmPassword)
         const payload = {
@@ -34,8 +36,13 @@ const WelcomeSignIn = ({navigation}) => {
         })
             .then(async res => {
             try {
+
                 const jsonRes = await res.json();
                 setErrorMessage(jsonRes.message)
+                console.log(res.status)
+                if(res.status === 200) {
+                    changeScreen()
+                }
             } catch (err) {
                 console.log(err);
             }

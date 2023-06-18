@@ -58,7 +58,15 @@ const SavedShopData = [
   },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
+
+const openscreen = () => {
+  navigation.navigate("product")
+}
+const openStore = () => {
+  navigation.navigate("store")
+
+}
 
   const { windowHeight, windowWidth } = useWindowDimensions();
 
@@ -81,7 +89,7 @@ const HomeScreen = () => {
           horizontal
           style={styles.discountsList}
           data={SavedShopData}
-          renderItem={({ item }) => <SavedShopItem addrs={item.addrs} image={item.image} />}
+          renderItem={({ item }) => <SavedShopItem addrs={item.addrs} image={item.image} onPress={() => openStore()} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -92,7 +100,7 @@ const HomeScreen = () => {
           horizontal
           style={styles.discountsList}
           data={productData}
-          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} onPress={() => openscreen()} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -103,7 +111,7 @@ const HomeScreen = () => {
           horizontal
           style={styles.discountsList}
           data={productData}
-          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} onPress={() => openscreen()} />}
           keyExtractor={item => item.id}
         />
         <View style={styles.borderLineView} />
@@ -114,7 +122,7 @@ const HomeScreen = () => {
           horizontal
           style={styles.discountsList}
           data={productData}
-          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} />}
+          renderItem={({ item }) => <DiscountItem title={item.title} price={item.price} image={item.image} onPress={() => openscreen()} />}
           keyExtractor={item => item.id}
         />
       </ScrollView>
@@ -122,9 +130,9 @@ const HomeScreen = () => {
   );
 };
 
-function DiscountItem({ title, price, image, }) {
+function DiscountItem({ title, price, image, onPress}) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.discountItem}>
         <View style={styles.discountItemImageView}>
           <Image source={image}
@@ -139,9 +147,9 @@ function DiscountItem({ title, price, image, }) {
   )
 }
 
-function SavedShopItem({ addrs, image, }) {
+function SavedShopItem({ addrs, image, onPress}) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.discountItem}>
         <View style={styles.discountItemImageView}>
           <Image source={image}
